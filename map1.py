@@ -37,7 +37,7 @@ fg = folium.FeatureGroup(name="My map")
 
 for lat, lon, name, ctr, con in zip(capit_lat, capit_lon, capit_name, country_name, continent_name):
     frame = folium.IFrame(html=html % (name,ctr,con), width=200, height=100)
-    fg.add_child(folium.CircleMarker(location=[lat, lon], radius=5, popup=folium.Popup(frame), fill_color=set_color(con), color='black', fill_opacity=0.8))
+    fg.add_child(folium.CircleMarker(location=[lat, lon], radius=5, popup=folium.Popup(frame), fill_color=set_color(con), color='grey', fill_opacity=0.9))
 
 map.add_child(fg)
 
