@@ -2,12 +2,12 @@ import folium
 import pandas
 
 map = folium.Map(location=[50,8], zoom_start=4, titles="Stamen Terrain")
-capitals = pandas.read_csv("capitals.csv")
-capit_lat = list(capitals["CapitalLatitude"])
-capit_lon = list(capitals["CapitalLongitude"])
-capit_name = list(capitals["CapitalName"])
-country_name = list(capitals["CountryName"])
-continent_name = list(capitals["ContinentName"])
+data = pandas.read_csv("capitals.csv")
+capit_lat = list(data["CapitalLatitude"])
+capit_lon = list(data["CapitalLongitude"])
+capit_name = list(data["CapitalName"])
+country_name = list(data["CountryName"])
+continent_name = list(data["ContinentName"])
 
 def set_color(continent):
     if continent == "Africa":
@@ -35,10 +35,12 @@ Continent: %s
 
 fg = folium.FeatureGroup(name="My map")
 
+fg.add_child(folium.GeoJson(data=open("population.json", 'r', encoding='utf-8-sig').read(), style_function=lambda x: {'fillColor':'yellow'}))
+
 for lat, lon, name, ctr, con in zip(capit_lat, capit_lon, capit_name, country_name, continent_name):
     frame = folium.IFrame(html=html % (name,ctr,con), width=200, height=100)
     fg.add_child(folium.CircleMarker(location=[lat, lon], radius=5, popup=folium.Popup(frame), fill_color=set_color(con), color='grey', fill_opacity=0.9))
 
-map.add_child(fg)
 
+map.add_child(fg)
 map.save("Map1.html")
