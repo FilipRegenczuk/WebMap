@@ -2,12 +2,13 @@ import folium
 import pandas
 
 map = folium.Map(location=[50,8], zoom_start=4, titles="Stamen Terrain")
-data = pandas.read_csv("capitals.csv")
-capit_lat = list(data["CapitalLatitude"])
-capit_lon = list(data["CapitalLongitude"])
-capit_name = list(data["CapitalName"])
-country_name = list(data["CountryName"])
-continent_name = list(data["ContinentName"])
+
+capitals = pandas.read_csv("capitals.csv")
+capit_lat = list(capitals["CapitalLatitude"])
+capit_lon = list(capitals["CapitalLongitude"])
+capit_name = list(capitals["CapitalName"])
+country_name = list(capitals["CountryName"])
+continent_name = list(capitals["ContinentName"])
 
 def set_color(continent):
     if continent == "Africa":
