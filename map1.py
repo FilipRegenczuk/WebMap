@@ -36,8 +36,11 @@ Continent: %s
 fg = folium.FeatureGroup(name="My map")
 
 fg.add_child(folium.GeoJson(data=open("population.json", 'r', encoding='utf-8-sig').read(),
-style_function=lambda x: {'fillColor':'green' if x['properties']['POP2005']<10000000
-else 'orange' if 10000000 <= x['properties']['POP2005'] < 20000000 else 'red'}))
+style_function=lambda x: {'fillColor':'green' if x['properties']['POP2005']<5000000
+else 'yellow' if 5000000 <= x['properties']['POP2005'] < 20000000
+else 'orange' if 20000000 <= x['properties']['POP2005'] < 50000000
+else 'lightred' if 50000000 <= x['properties']['POP2005'] < 100000000
+else 'red'}))
 
 for lat, lon, name, ctr, con in zip(capit_lat, capit_lon, capit_name, country_name, continent_name):
     frame = folium.IFrame(html=html % (name,ctr,con), width=200, height=100)
