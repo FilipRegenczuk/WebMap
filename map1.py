@@ -13,15 +13,17 @@ def set_color(continent):
     if continent == "Africa":
         return 'darkgreen'
     elif continent == "Europe":
-        return 'red'
+        return 'orange'
     elif continent == "Asia":
-        return 'darkred'
+        return 'red'
     elif continent == "North America":
-        return 'darkblue'
-    elif continent == "South America":
         return 'blue'
+    elif continent == "South America":
+        return 'lightblue'
     elif continent == "Australia":
-        return 'purple'
+        return 'beige'
+    else:
+        return 'gray'
 
 
 html = """<h4>%s:</h4>
@@ -35,7 +37,7 @@ fg = folium.FeatureGroup(name="My map")
 
 for lat, lon, name, ctr, con in zip(capit_lat, capit_lon, capit_name, country_name, continent_name):
     frame = folium.IFrame(html=html % (name,ctr,con), width=200, height=100)
-    fg.add_child(folium.Marker(location=[lat, lon], popup=folium.Popup(frame), icon=folium.Icon(color=set_color(con))))
+    fg.add_child(folium.CircleMarker(location=[lat, lon], radius=5, popup=folium.Popup(frame), fill_color=set_color(con), color='black', fill_opacity=0.8))
 
 map.add_child(fg)
 
