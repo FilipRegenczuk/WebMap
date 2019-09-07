@@ -22,7 +22,7 @@ def set_color(continent):
         return 'blue'
     elif continent == "Australia":
         return 'purple'
-   
+
 
 html = """<h4>%s:</h4>
 Country: %s
